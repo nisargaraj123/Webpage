@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Roadmap & Navbar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+
+        /* Navbar Styling */
+        nav {
+            background-color: #2c3e50;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul li {
+            font-size: 18px;
+            position: relative;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #ecf0f1;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #1abc9c;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #34495e;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #1abc9c;
+        }
+
+        /* Container Styling */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+
+        /* DevOps Roadmap Section */
+        .roadmap {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            position: relative;
+        }
+
+        .roadmap-step {
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 200px;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .roadmap-step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .roadmap-step h3 {
+            font-size: 20px;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+
+        .roadmap-step p {
+            font-size: 16px;
+            color: #7f8c8d;
+        }
+
+        .roadmap-step .icon {
+            font-size: 40px;
+            color: #1abc9c;
+            margin-bottom: 15px;
+        }
+
+        .roadmap-step.completed {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .roadmap-step.in-progress {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .roadmap-step .line {
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background-color: #ecf0f1;
+            top: 50%;
+            left: 0;
+            z-index: -1;
+        }
+
+        .roadmap-step:first-child .line {
+            display: none;
+        }
+
+        .roadmap-step:before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            border: 2px solid #1abc9c;
+            border-radius: 50%;
+            top: 50%;
+            left: -10px;
+            transform: translateY(-50%);
+        }
+
+        .roadmap-step.completed:before {
+            background-color: #fff;
+            border-color: #2ecc71;
+        }
+
+        .roadmap-step.in-progress:before {
+            background-color: #fff;
+            border-color: #f39c12;
+        }
+
+        /* Add some responsiveness */
+        @media (max-width: 768px) {
+            .roadmap {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .roadmap-step {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav ul li {
+                font-size: 16px;
+            }
+        }
+
+        /* Tool Information Section Styling */
+        .tool-info {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tool-info h3 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .tool-info p {
+            font-size: 18px;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+
+        .tool-info img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .tool-info:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <ul>
+            <!-- Left side of navbar (Tools List) -->
+            <li class="dropdown">
+                <a href="#" onclick="toggleDropdown()">DevOps Roadmap</a>
+                <div class="dropdown-content">
+                    <a href="#git-github-info" onclick="closeDropdown()">Git & GitHub</a>
+                    <a href="#maven-info" onclick="closeDropdown()">Maven</a>
+                    <a href="#jenkins-info" onclick="closeDropdown()">Jenkins</a>
+                    <a href="#docker-info" onclick="closeDropdown()">Docker & DockerHub</a>
+                    <a href="#ansible-info" onclick="closeDropdown()">Ansible</a>
+                    <a href="#terraform-info" onclick="closeDropdown()">Terraform</a>
+                    <a href="#kubernetes-info" onclick="closeDropdown()">Kubernetes</a>
+                </div>
+            </li>
+
+            <!-- Right side of navbar (Creator Info) -->
+            <li><a href="#">Kulashekar Alwar N - Tech Enthusiast</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Page Creator Section -->
+        <section id="page-creator">
+            
+            <h1>DevOps Roadmap</h1>
+            
+        </section>
+
+        <!-- DevOps Roadmap Section -->
+        <section id="roadmap">
+            <div class="roadmap">
+                <!-- Git & GitHub -->
+                <div id="git-github" class="roadmap-step completed">
+                    <div class="icon">💻</div>
+                    <h3>Git & GitHub</h3>
+                    <p>Version control and collaboration</p>
+                    <div class="line"></div>
+                </div>
+
+                <!-- Maven -->
+                <div id="maven" class="roadmap-step in-progress">
+                    <div class="icon">📦</div>
+                    <h3>Maven</h3>
+                    <p>Build automation tool</p>
+                    <div class="line"></div>
+                </div>
+
+                <!-- Jenkins -->
+                <div id="jenkins" class="roadmap-step">
+                    <div class="icon">🔨</div>
+                    <h3>Jenkins</h3>
+                    <p>Continuous Integration/Delivery</p>
+                    <div class="line"></div>
+                </div>
+
+                <!-- Docker & DockerHub -->
+                <div id="docker" class="roadmap-step">
+                    <div class="icon">🐳</div>
+                    <h3>Docker & DockerHub</h3>
+                    <p>Containerization and image storage</p>
+                    <div class="line"></div>
+                </div>
+
+                <!-- Ansible -->
+                <div id="ansible" class="roadmap-step">
+                    <div class="icon">⚙️</div>
+                    <h3>Ansible</h3>
+                    <p>Configuration management tool</p>
+                    <div class="line"></div>
+                </div>
+
+                <!-- Terraform -->
+                <div id="terraform" class="roadmap-step">
+                    <div class="icon">🌍</div>
+                    <h3>Terraform</h3>
+                    <p>Infrastructure as Code</p>
+                    <div class="line"></div>
+                </div>
+
+                <!-- Kubernetes -->
+                <div id="kubernetes" class="roadmap-step">
+                    <div class="icon">☸️</div>
+                    <h3>Kubernetes</h3>
+                    <p>Container orchestration</p>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Basic Information for Each Tool -->
+        <section>
+            <div id="git-github-info" class="tool-info">
+                <h3>Git & GitHub</h3>
+                <img src="https://alyssonmach.github.io/Minicurso-Git-e-GitHub/img/5.png" alt="Git & GitHub Architecture" height="200" width="200">
+                <p><strong>Git:</strong> Git is a distributed version control system that helps you track changes in code and collaborate with others. It enables multiple developers to work on the same project without conflicts.</p>
+                <p><strong>GitHub:</strong> GitHub is a cloud-based service that allows you to store and manage Git repositories. It enables easy collaboration and offers features such as pull requests, issues, and project management tools.</p>
+            </div>
+
+            <div id="maven-info" class="tool-info">
+                <h3>Maven</h3>
+                <img src="https://tse3.mm.bing.net/th?id=OIP.RJMiOW4RJ3d1o01vXnqEPAHaFj&pid=Api&P=0&h=180" alt="Maven Architecture" height="200" width="200">
+                
+                <p><strong>Maven:</strong> Maven is a build automation tool used primarily for Java projects. It simplifies the build process by providing a standard way to compile, package, and deploy Java applications.</p>
+                <p>Maven uses XML files (pom.xml) to describe the project structure, dependencies, and build configuration, making it easier to manage projects in a consistent manner.</p>
+            </div>
+
+            <div id="jenkins-info" class="tool-info">
+                <h3>Jenkins</h3>
+                <img src="https://tse4.mm.bing.net/th?id=OIP.6ww42YzZIsbSkRF1NABJigHaHa&pid=Api&P=0&h=180" alt="Jenkins Architecture" height="200" width="200">
+              
+                <p><strong>Jenkins:</strong> Jenkins is an open-source automation server used for continuous integration (CI) and continuous delivery (CD). It automates the build, test, and deployment pipelines for applications, ensuring faster and more reliable delivery.</p>
+                <p>Jenkins integrates with many version control systems, build tools, and other services to enable a seamless DevOps workflow.</p>
+            </div>
+
+            <div id="docker-info" class="tool-info">
+                <h3>Docker & DockerHub</h3>
+                <img src="https://tse2.mm.bing.net/th?id=OIP.1nK0qmlVQ6esuS6OIyiOxAHaFy&pid=Api&P=0&h=180" alt="Docker Architecture" height="200" width="200">
+                
+                <p><strong>Docker:</strong> Docker is a platform that enables developers to package applications and their dependencies into containers. Containers are portable, lightweight, and can run consistently across different environments.</p>
+                <p><strong>DockerHub:</strong> DockerHub is a cloud-based registry service where developers can store and share Docker images. It allows you to pull and push containerized applications, facilitating easy collaboration.</p>
+            </div>
+
+            <div id="ansible-info" class="tool-info">
+                <h3>Ansible</h3>
+                <img src="https://datascientest.com/wp-content/uploads/2022/06/ansible.png.webp" alt="Ansible Architecture" height="200" width="200">
+            
+                <p><strong>Ansible:</strong> Ansible is an open-source automation tool used for configuration management, application deployment, and task automation. It simplifies complex IT workflows and enables infrastructure-as-code practices.</p>
+                <p>Ansible uses simple YAML-based playbooks to describe automation tasks, making it easy for developers and system administrators to manage servers and applications.</p>
+            </div>
+
+            <div id="terraform-info" class="tool-info">
+                <h3>Terraform</h3>
+                <img src="https://tse2.mm.bing.net/th?id=OIP.1gAEVon2RF5oko4iWCfftgHaHO&pid=Api&P=0&h=180" alt="Terraform Architecture" height="200" width="200">
+            
+                <p><strong>Terraform:</strong> Terraform is an open-source Infrastructure as Code (IaC) tool that allows you to define, provision, and manage infrastructure in a declarative manner. It supports multiple cloud providers like AWS, Azure, and Google Cloud.</p>
+                <p>Terraform enables you to write configuration files describing infrastructure resources and their relationships, and it automatically manages the provisioning and configuration of these resources.</p>
+            </div>
+
+            <div id="kubernetes-info" class="tool-info">
+                <h3>Kubernetes</h3>
+                <img src="https://s.yimg.com/zb/imgv1/3e973ad7-a8a9-3534-93a4-73edf5cece1b/t_500x300" alt="Kubernetes Architecture" height="200" width="200">
+
+                <p><strong>Kubernetes:</strong> Kubernetes is an open-source container orchestration platform used to automate the deployment, scaling, and management of containerized applications.</p>
+                <p>Kubernetes provides high availability, scalability, and automated rollouts/rollbacks, making it a critical tool for managing large-scale applications in production environments.</p>
+            </div>
+        </section>
+    </div>
+    <center>
+        <div class="dashboard-container">
+        <!-- Page Creator Info -->
+        <div class="dashboard-card">
+            <div class="icon">👤</div>
+            <h2>created by</h2>
+            <p><b>Kulashekar Alwar - DevOps Engineer</b></p>
+        </div>
+    </div>
+</center>
+
+    <script>
+        function toggleDropdown() {
+            const dropdownContent = document.querySelector('.dropdown-content');
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function closeDropdown() {
+            const dropdownContent = document.querySelector('.dropdown-content');
+            dropdownContent.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
